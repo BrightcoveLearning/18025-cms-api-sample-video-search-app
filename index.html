@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>CMS API Sample: Video Search App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/source-code-pro" type="text/css"/>
+  
+  <link rel='stylesheet prefetch' href='http://docs.brightcove.com/en/scripts/rome/rome.min.css'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+  <section class="bcls-section">
+<h2 id="accountInputs">Account Inputs</h2>
+
+<fieldset class="bcls-fieldset"><legend>Inputs</legend>
+
+<p>Account ID: <input id="account_id" type="text" value="" data-bind="value: account_id" /></p>
+
+<p>Client ID: <input id="client_id" type="text" value="" data-bind="value: client_id" /></p>
+
+<p>Client Secret: <input id="client_secret" type="text" value="" data-bind="value: client_secret" /></p>
+
+<p>Proxy URL: <input id="proxyURL" type="text" data-bind="value: proxyURL" /></p>
+</fieldset>
+</section>
+
+<section class="bcls-section">
+<h2 id="searchInput">Search Inputs</h2>
+
+<fieldset id="searchInputs" data-bind="enable: haveAccountInputs"><legend>Search Inputs</legend>
+
+<p><input type="checkbox" id="exactMatch" data-bind="checked: exactMatch" /> Require exact match on search terms</p>
+
+<p><input type="checkbox" id="requiredTerms" data-bind="checked: requiredTerms" /> Only return videos that have <strong>all</strong> the search terms</p>
+
+<p><input type="checkbox" id="excludeTerms" data-bind="checked: excludeTerms" /> Only return videos that do <strong>not</strong> have the search terms</p>
+
+<p><input type="checkbox" id="searchComplete" data-bind="checked: searchComplete" /><strong>Only</strong> return videos that have been completely processed</p>
+
+<p>Limit search to this field: <select id="searchField" data-bind="disable: haveCustomField(), options: searchField, value: selectedSearchField, optionsCaption: 'Any'"></select></p>
+
+<p>Limit search to this custom field: <input type="text" id="customField" data-bind="value: customField, disable: haveSearchField" /></p>
+
+<div data-bind="visible: !haveSearchState() &amp;&amp; !havePlayable()">Search terms: <input id="searchTerms" type="text" data-bind="value: searchTerms" /></div>
+
+<div data-bind="visible: haveSearchState">State: <select id="searchStates" data-bind="options: searchState, value: selectedSearchState"></select></div>
+
+<div data-bind="visible: havePlayable">State: <select id="searchPlayable" data-bind="options: searchPlayable, value: selectedSearchState"></select></div>
+
+<table class="bcls-table">
+	<caption>Limit search by dates:</caption>
+	<tbody>
+		<tr>
+			<td>Date type</td>
+			<td>From date</td>
+			<td>To date</td>
+		</tr>
+		<tr>
+			<td><select class="date" id="dateRangeType" data-bind="options: dateRangeType, value: selectedDateRangeType, optionsCaption: 'Do not limit by date'"></select></td>
+			<td><input id="fromDate" class="date" data-bind="enable: haveDateType" /></td>
+			<td><input id="toDate" class="date" data-bind="enable: haveDateType" /></td>
+		</tr>
+	</tbody>
+</table>
+
+<p>Items found:<br />
+Offset (number of items to skip): <select id="offset" data-bind="options: offsets, value: selectedOffset"></select></p>
+
+<p>Number of items to return: <select id="limit" data-bind="options: limit, value: selectedLimit"></select></p>
+
+<p>Sort results by: <select id="sort" data-bind="options: sortOptions, value: selectedSortOption"></select></p>
+
+<p><button class="bcls-button" id="submitRequest" data-bind="click: setupURL, enable: haveSearchTermsOrDateRange">Submit Request</button></p>
+</fieldset>
+</section>
+
+<section class="bcls-section">
+<h2 id="outputLog">Results</h2>
+
+<fieldset class="bcls-fieldset"><legend>Outputs</legend>
+
+<p>Note that if you request multiple result sets using the offset, new items will be appended to the existing ones.</p>
+
+<p>API request:</p>
+<textarea id="apiURL" class="bcls-code">API request will appear here...</textarea>
+
+<h3>Response</h3>
+
+<pre>
+<code id="response" class="language-json">Response will appear here...</code>
+</pre>
+</fieldset>
+</section>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-debug.js'></script>
+<script src='http://docs.brightcove.com/en/scripts/rome/rome.min.js'></script>
+
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>
